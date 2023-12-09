@@ -1,0 +1,6 @@
+postID,ad_materialID,media,headline,destination_url,call_to_action,comments,target_type,locations,daily_budget
+8,8,Image,Check Out These New Products,newproducts.com,Discover Now,We have the hottest new products,Tech,North America,2.50
+9,9,GIF,Don't Miss These Deals,deals.com,Hurry while supplies last!,Best deals found here,Shoppers,Global,0.50
+10,10,Image,Top Items on Clearance,clearance.com,Take advantage of these sales,Great clearances on top products,Consumers,Europe,1.25
+11,11,Image,High-End Fashion Found Here,luxury.com,Buy luxury items,Luxury fashionn for fair prices,Wealthy,Asia/Europe,10.00
+12,12,GIF,Vote Smith,smith4gov.com,Vote for Smith,Cast your vote for Smith,Politcal,Canada,25.00

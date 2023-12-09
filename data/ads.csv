@@ -1,0 +1,8 @@
+ad_materialID,name,type,headline,image,thumbnail_image,destination_url,display_url,call_to_action,ad_groupID
+1,SummerSaleAd,Product,Amazing Deals on Summer Essentials,summer_sale_image.jpg,thumbnail_summer_sale.jpg,clearance.com/summer,clearance.com,Shop Now,15
+2,FlashDealAd,Deal,Limited-Time Flash Deals,flash_deal_image.jpg,thumbnail_flash_deal.jpg,deals.com/deal,deals.com,Grab Yours Now,14
+3,NewProductAd,Product,Introducing Exciting New Arrival,new_product_image.jpg,thumbnail_new_product.jpg,newproducts.com/new-product,newproducts.com,Discover Now,13
+4,BackToSchoolAd,Sale,Back-to-School Savings Event,back_to_school_image.jpg,thumbnail_back_to_school.jpg,deals.com/back-to-school,deals.com,Save Big,14
+5,ClearanceAd,Sale,Year-End Clearance Extravaganza,clearance_image.jpg,thumbnail_clearance.jpg,clearance.com/sale,clearance.com,Shop Clearance,15
+6,LuxuryFashionAd,Product,Discover Elegance in Luxury Fashion,luxury_fashion_image.jpg,thumbnail_luxury_fashion.jpg,luxuryfashion.com/new-arrivals,luxuryfashion.com,Explore Now,16
+7,PoliticalCampaignAd,Campaign,Join the Movement for Change,political_campaign_image.jpg,thumbnail_political_campaign.jpg,changetoday.com/support,changetoday.com,Support Now,17

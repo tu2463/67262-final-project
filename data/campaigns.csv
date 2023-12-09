@@ -1,0 +1,6 @@
+postID, ad_materialID, destination_url, call_to_action, allow_comments, target_type, locations, daily_budget
+8,8,newproducts.com,Discover Now, true,Tech,North America,2.50
+9,9,deals.com,Hurry while supplies last!, true,Shoppers,Global,0.50
+10,10,clearance.com,Take advantage of these sales, false,Consumers,Europe,1.25
+11,11,luxury.com,Buy luxury items, true,Wealthy,Asia/Europe,10.00
+12,12,smith4gov.com,Vote for Smith, false,Politcal,Canada,25.00

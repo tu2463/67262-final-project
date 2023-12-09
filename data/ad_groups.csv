@@ -1,0 +1,6 @@
+ad_materialID,name,locations,devices,carriers,placements,budget,bid,schedule,time_of_day,campaignID
+13,NewProductAds,United States,Desktop,Verizon,Top,100.00,High,Monday to Friday 9AM-5PM,09:00:00,8
+14,DealAds,Global,Mobile,AT&T,Bottom,30.00,Low,Weekends 12PM-8PM,12:00:00,9
+15,ClearanceSales,Europe,All,Verizon,Top,200.00,Low,Everyday 10AM-6PM,10:00:00,10
+16,LuxuryAds,Asia,Tablet,T-Mobile,Bottom,600.00,Medium,Monday to Friday 8AM-4PM,08:00:00,11
+17,PoliticalAds,Canada,All,Bell,Top,1000.00,Medium,Weekdays 11AM-7PM,11:00:00,12
