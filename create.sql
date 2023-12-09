@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-12-08 06:23:58.537
+-- Last modification date: 2023-12-09 20:59:49.659
 
 -- tables
 -- Table: AdAccountJoinings
@@ -49,14 +49,13 @@ CREATE TABLE Ads (
 
 -- Table: AdvertisingMaterials
 CREATE TABLE AdvertisingMaterials (
-    ad_materialID int  NOT NULL,
+    ad_materialID serial  NOT NULL,
     status text  NOT NULL,
     impressions int  NOT NULL,
     eCPM decimal(15,3)  NOT NULL,
     click int  NOT NULL,
     CPC decimal(10,2)  NOT NULL,
     CTR decimal(10,2)  NOT NULL,
-    amount_spent decimal(10,2)  NOT NULL,
     accountID int  NOT NULL,
     transactionID int  NOT NULL,
     CONSTRAINT AdvertisingMaterials_pk PRIMARY KEY (ad_materialID)
@@ -81,11 +80,9 @@ CREATE TABLE Audiences (
 CREATE TABLE Campaigns (
     postID int  NOT NULL,
     ad_materialID int  NOT NULL,
-    media text  NOT NULL,
-    headline text  NOT NULL,
     destination_url text  NOT NULL,
     call_to_action text  NOT NULL,
-    comments text  NOT NULL,
+    allow_comments boolean  NOT NULL,
     target_type text  NOT NULL,
     locations text  NOT NULL,
     daily_budget decimal(15,3)  NOT NULL,
@@ -103,17 +100,17 @@ CREATE TABLE CommentRegulations (
 CREATE TABLE Comments (
     comID int  NOT NULL,
     content text  NOT NULL,
-    postID int  NOT NULL,
+    postID int  NULL,
     reply_to_comID int  NULL,
     commenter_userID int  NOT NULL,
     CONSTRAINT Comments_pk PRIMARY KEY (comID)
 );
 
--- Table: FlairGrantings
-CREATE TABLE FlairGrantings (
+-- Table: FlairCreations
+CREATE TABLE FlairCreations (
     modID int  NOT NULL,
     flairID int  NOT NULL,
-    CONSTRAINT FlairGrantings_pk PRIMARY KEY (modID,flairID)
+    CONSTRAINT FlairCreations_pk PRIMARY KEY (modID,flairID)
 );
 
 -- Table: Flairs
@@ -134,9 +131,9 @@ CREATE TABLE Guests (
 
 -- Table: Interactions
 CREATE TABLE Interactions (
-    interactionID int  NOT NULL,
+    interactionID serial  NOT NULL,
     type text  NOT NULL,
-    postID int  NOT NULL,
+    postID int  NULL,
     done_by_userID int  NOT NULL,
     comID int  NULL,
     CONSTRAINT Interactions_pk PRIMARY KEY (interactionID)
@@ -151,13 +148,14 @@ CREATE TABLE Moderators (
 
 -- Table: Payments
 CREATE TABLE Payments (
-    transactionID int  NOT NULL,
+    transactionID serial  NOT NULL,
     amount decimal(10,2)  NOT NULL,
     timestamp timestamp  NOT NULL,
     method text  NOT NULL,
     note text  NULL,
-    payer_userID int  NOT NULL,
-    subscriptionID int  NOT NULL,
+    payer_userID int  NULL,
+    subscriptionID int  NULL,
+    payer_ad_accountID int  NULL,
     CONSTRAINT Payments_pk PRIMARY KEY (transactionID)
 );
 
@@ -191,7 +189,7 @@ CREATE TABLE PostRegulations (
 
 -- Table: Posts
 CREATE TABLE Posts (
-    postID int  NOT NULL,
+    postID serial  NOT NULL,
     IP text  NOT NULL,
     timestamp timestamp  NOT NULL,
     title text  NOT NULL,
@@ -199,7 +197,7 @@ CREATE TABLE Posts (
     original_content_tag boolean  NOT NULL,
     spoiler_tag boolean  NOT NULL,
     NSFW_tag boolean  NOT NULL,
-    poster_userID int  NOT NULL,
+    poster_userID int  NULL,
     subredID int  NOT NULL,
     flairID int  NULL,
     CONSTRAINT Posts_pk PRIMARY KEY (postID)
@@ -217,6 +215,13 @@ CREATE TABLE RegisteredUsers (
     display_name text  NOT NULL,
     about text  NOT NULL,
     CONSTRAINT RegisteredUsers_pk PRIMARY KEY (userID)
+);
+
+-- Table: SubredditInvolvements
+CREATE TABLE SubredditInvolvements (
+    audienceID int  NOT NULL,
+    subredID int  NOT NULL,
+    CONSTRAINT SubredditInvolvements_pk PRIMARY KEY (audienceID,subredID)
 );
 
 -- Table: SubredditJoinings
@@ -314,6 +319,22 @@ ALTER TABLE AdGroups ADD CONSTRAINT AdGroups_Campaigns
     INITIALLY IMMEDIATE
 ;
 
+-- Reference: Ads_AdGroups (table: Ads)
+ALTER TABLE Ads ADD CONSTRAINT Ads_AdGroups
+    FOREIGN KEY (ad_groupID)
+    REFERENCES AdGroups (ad_materialID)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: Ads_AdvertisingMaterials (table: Ads)
+ALTER TABLE Ads ADD CONSTRAINT Ads_AdvertisingMaterials
+    FOREIGN KEY (ad_materialID)
+    REFERENCES AdvertisingMaterials (ad_materialID)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
 -- Reference: AdvertisingMaterials_AdAccounts (table: AdvertisingMaterials)
 ALTER TABLE AdvertisingMaterials ADD CONSTRAINT AdvertisingMaterials_AdAccounts
     FOREIGN KEY (accountID)
@@ -402,16 +423,16 @@ ALTER TABLE Comments ADD CONSTRAINT Comments_RegisteredUsers
     INITIALLY IMMEDIATE
 ;
 
--- Reference: FlairGrantings_Flairs (table: FlairGrantings)
-ALTER TABLE FlairGrantings ADD CONSTRAINT FlairGrantings_Flairs
+-- Reference: FlairGrantings_Flairs (table: FlairCreations)
+ALTER TABLE FlairCreations ADD CONSTRAINT FlairGrantings_Flairs
     FOREIGN KEY (flairID)
     REFERENCES Flairs (flairID)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: FlairGrantings_Moderators (table: FlairGrantings)
-ALTER TABLE FlairGrantings ADD CONSTRAINT FlairGrantings_Moderators
+-- Reference: FlairGrantings_Moderators (table: FlairCreations)
+ALTER TABLE FlairCreations ADD CONSTRAINT FlairGrantings_Moderators
     FOREIGN KEY (modID)
     REFERENCES Moderators (userID)  
     NOT DEFERRABLE 
@@ -454,6 +475,14 @@ ALTER TABLE Moderators ADD CONSTRAINT Moderators_RegisteredUsers
 ALTER TABLE Moderators ADD CONSTRAINT Moderators_Subreddits
     FOREIGN KEY (subredID)
     REFERENCES Subreddits (subredID)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: Payments_AdAccounts (table: Payments)
+ALTER TABLE Payments ADD CONSTRAINT Payments_AdAccounts
+    FOREIGN KEY (payer_ad_accountID)
+    REFERENCES AdAccounts (accountID)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
@@ -554,6 +583,22 @@ ALTER TABLE RegisteredUsers ADD CONSTRAINT RegisteredUsers_Users
     INITIALLY IMMEDIATE
 ;
 
+-- Reference: SubredditInvolvement_Audiences (table: SubredditInvolvements)
+ALTER TABLE SubredditInvolvements ADD CONSTRAINT SubredditInvolvement_Audiences
+    FOREIGN KEY (audienceID)
+    REFERENCES Audiences (audienceID)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
+-- Reference: SubredditInvolvement_Subreddits (table: SubredditInvolvements)
+ALTER TABLE SubredditInvolvements ADD CONSTRAINT SubredditInvolvement_Subreddits
+    FOREIGN KEY (subredID)
+    REFERENCES Subreddits (subredID)  
+    NOT DEFERRABLE 
+    INITIALLY IMMEDIATE
+;
+
 -- Reference: SubredditJoinings_RegisteredUsers (table: SubredditJoinings)
 ALTER TABLE SubredditJoinings ADD CONSTRAINT SubredditJoinings_RegisteredUsers
     FOREIGN KEY (userID)
@@ -582,22 +627,6 @@ ALTER TABLE Subreddits ADD CONSTRAINT Subreddits_RegisteredUsers
 ALTER TABLE Subscriptions ADD CONSTRAINT Subscription_RegisteredUsers
     FOREIGN KEY (holder_userID)
     REFERENCES RegisteredUsers (userID)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
--- Reference: Table_30_AdGroups (table: Ads)
-ALTER TABLE Ads ADD CONSTRAINT Table_30_AdGroups
-    FOREIGN KEY (ad_groupID)
-    REFERENCES AdGroups (ad_materialID)  
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE
-;
-
--- Reference: Table_30_AdvertisingMaterials (table: Ads)
-ALTER TABLE Ads ADD CONSTRAINT Table_30_AdvertisingMaterials
-    FOREIGN KEY (ad_materialID)
-    REFERENCES AdvertisingMaterials (ad_materialID)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;

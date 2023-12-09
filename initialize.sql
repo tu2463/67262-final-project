@@ -5,7 +5,7 @@ DROP database if EXISTS project;
 CREATE database project;
 \c project
 
-\i create_v7.SQL
+\i create.SQL
 
 -- load the data
 
