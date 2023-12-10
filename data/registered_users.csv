@@ -12,7 +12,7 @@ userID,email,password,gender,display_language,content_languages,local_customizat
 21,bookworm99@gmail.com,reading123,female,english,english,Ohio,LiteraryLover,Escaping reality through the pages of a good book.
 22,techEnthusiast@gmail.com,tech123,male,english,english,Georgia,GadgetGeek,Passionate about the latest in technology and gadgets.
 23,musicFan@gmail.com,tunes456,female,english,english/spanish,Tennessee,MelodyMaster,Exploring the world of music one note at a time.
-24,sportsFan@gmail.com,sports789,male,english,english,Michigan,TeamSpiritGuy,Cheering for the home team and enjoying sports conversations.
-25,cookingAficionado@gmail.com,foodie1,female,english,english,Arizona,HomeChef,Creating delicious dishes in the kitchen is my happy place.
-26,artLover@gmail.com,canvasArt,male,english,english/spanish,Illinois,VisualExplorer,Appreciating the beauty of art in all its forms.
+24,sportsFan@gmail.com,sports789,male,spanish,english,Michigan,TeamSpiritGuy,Cheering for the home team and enjoying sports conversations.
+25,cookingAficionado@gmail.com,foodie1,female,spanish,english,Arizona,HomeChef,Creating delicious dishes in the kitchen is my happy place.
+26,artLover@gmail.com,canvasArt,male,spanish,english/spanish,Illinois,VisualExplorer,Appreciating the beauty of art in all its forms.
 27,movieBuff@gmail.com,cinephile2,non-binary,english,english,Colorado,FilmAficionado,From blockbusters to indie films--cinema is my love.
