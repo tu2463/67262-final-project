@@ -4,13 +4,13 @@ us='''
 * Complex analytical US 8
 
    As a:  Advertiser
- I want:  Find a subreddit that have the most number of users who can speak the language my company mainly uses
-So That:  I can post ads using the language of my company/product
+ I want:  Find the subreddits that have more users who can speak the language my company primarily uses
+So That:  I can post ads using the language of my company/product for a better targeted audience
 '''
 
 print(us)
 
-def find_best_subreddits_by_language(p_lang):
+def find_subreddits_by_language(p_lang):
     cols = 'j.subredID COUNT(j.userID)'
     tmpl =  f'''
     SELECT {c(cols)}
@@ -26,4 +26,4 @@ def find_best_subreddits_by_language(p_lang):
     # pp(rows)
     show_table( rows, 'j.subredID, COUNT(j.userID)' )
 
-find_best_subreddits_by_language('spanish')    
+find_subreddits_by_language('spanish')    

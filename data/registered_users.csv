@@ -16,3 +16,5 @@ userID,email,password,gender,display_language,content_languages,local_customizat
 25,cookingAficionado@gmail.com,foodie1,female,spanish,english,Arizona,HomeChef,Creating delicious dishes in the kitchen is my happy place.
 26,artLover@gmail.com,canvasArt,male,spanish,english/spanish,Illinois,VisualExplorer,Appreciating the beauty of art in all its forms.
 27,movieBuff@gmail.com,cinephile2,non-binary,english,english,Colorado,FilmAficionado,From blockbusters to indie films--cinema is my love.
+28,futureManager@gmail.com,fm100,non-binary,english,english,Florida,Boss,I want to own a business
+29,futureModerator@gmail.com,fm200,non-binary,spanish,spanish,New York,Head,I want to run a business

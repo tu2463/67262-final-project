@@ -10,14 +10,23 @@ So That:  I can inform and remind the members of this subreddit to follow the ru
 
 print(us)
 
-def publish_rules(p_rules, p_subredID):
+def publish_rules(p_rules, p_subredID, p_subredID_again):
     tmpl =  f'''
-UPDATE Subreddits
-SET rules = %s
-WHERE subredID = %s
-'''
-    cmd = cur.mogrify(tmpl, (p_rules, p_subredID,))
+    UPDATE Subreddits
+    SET rules = %s
+    WHERE subredID = %s;
+
+    SELECT subredID, rules
+    FROM Subreddits
+    WHERE subredID = %s
+    '''
+    cmd = cur.mogrify(tmpl, (p_rules, p_subredID, p_subredID_again,))
     print_cmd(cmd)
     cur.execute(cmd)
 
-publish_rules("1: No referral links. 2: Post deals with expiration dates. 3: Be aware of potential scams", 4)    
+    rows = cur.fetchall()
+    pp(rows)
+
+subredID = 4
+rules = "1: No referral links. 2: Post deals with expiration dates. 3: Be aware of potential scams"
+publish_rules(rules, subredID, subredID)    

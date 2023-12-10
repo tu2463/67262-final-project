@@ -5,7 +5,7 @@ us='''
 
    As a:  Moderator
  I want:  To know the users who are most active under posts with a certain flair
-So That:   can gain insights about the popularity and impact that specific users are having to make under each type of post more informed content moderation decisions
+So That:  I can gain insights about an user’s impact under each type of post and better moderate the members
 '''
 
 print(us)

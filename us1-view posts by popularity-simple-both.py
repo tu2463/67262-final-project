@@ -17,8 +17,7 @@ So That:  I can stay informed and actively engage in a topic that interests me
 
 print(us)
 
-def view_posts_by_time_and_popularity(p_subredID):
-    # cols = 'p.postID p.timestamp p.title p.content p.original_content_tag p.spoiler_tag p.NSFW_tag p.poster_userID p.flairID'
+def view_posts_by_popularity(p_subredID):
     cols = 'timestamp title content original_content_tag spoiler_tag NSFW_tag poster_userID flairID popularity'
     tmpl =  f'''
  SELECT {c(cols)}
@@ -34,4 +33,4 @@ def view_posts_by_time_and_popularity(p_subredID):
     show_table( rows, 'time title content original_content_tag spoiler_tag NSFW_tag poster_userID flairID popularity' )
     # show_table( rows, cols )
 
-view_posts_by_time_and_popularity(6)    
+view_posts_by_popularity(6)    
