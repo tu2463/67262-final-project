@@ -19,7 +19,7 @@ CREATE database project;
 \copy Flairs(flairID, name, subredID) FROM data/flairs.csv csv header;
 \copy UserFlairs(flairID) FROM data/user_flairs.csv csv header;
 \copy PostFlairs(flairID) FROM data/post_flairs.csv csv header;
-\copy Posts(IP, timestamp, title, content, original_content_tag, spoiler_tag, NSFW_tag, poster_userID, flairID, subredID) FROM data/posts.csv csv header; -- serialized ID
+\copy Posts(IP, timestamp, title, content, original_content_tag, spoiler_tag, NSFW_tag, poster_userID, flairID, subredID, popularity) FROM data/posts.csv csv header; -- serialized ID
 \copy AdvertisingMaterials(status, impressions, eCPM, click, CPC, CTR, accountID, transactionID) FROM data/ad_materials.csv csv header; -- serialized ID, normalized (deleted amount_spent)
 \copy Campaigns(postID, ad_materialID, destination_url, call_to_action, allow_comments, target_type, locations, daily_budget) FROM data/campaigns.csv csv header;  -- changed comments to allow_comments; normalized (deleted headline & media)
 \copy AdGroups(ad_materialID, name, locations, devices, carriers, placements, budget, bid, schedule, time_of_day, campaignID) FROM data/ad_groups.csv csv header;
@@ -41,7 +41,6 @@ CREATE database project;
 \copy CommentRegulations(modID, comID) FROM data/comment_regulations.csv csv header;
 \copy Interactions(type, postID, done_by_userID, comID) FROM data/interactions.csv csv header; -- delete id (it's serialized now)
 
-DROP FUNCTION IF EXISTS fn_update_popularity();
 CREATE FUNCTION fn_update_popularity()
 RETURNS trigger
 LANGUAGE plpgsql AS
@@ -58,7 +57,6 @@ BEGIN
             WHERE postID = new.postID;
         end if;
     end if;
-
     return null;
 END
 $$ ;

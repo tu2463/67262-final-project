@@ -19,12 +19,11 @@ print(us)
 
 def view_posts_by_time_and_popularity(p_subredID):
     # cols = 'p.postID p.timestamp p.title p.content p.original_content_tag p.spoiler_tag p.NSFW_tag p.poster_userID p.flairID'
-    cols = 'p.timestamp p.title p.content p.original_content_tag p.spoiler_tag p.NSFW_tag p.poster_userID p.flairID COUNT(i.interactionID)'
+    cols = 'timestamp title content original_content_tag spoiler_tag NSFW_tag poster_userID flairID popularity'
     tmpl =  f'''
-SELECT {c(cols)} AS popularity
-  FROM Posts AS p JOIN Interactions AS i ON p.postID = i.postID
-  WHERE i.type = 'upvote' AND p.subredID = %s
-  GROUP BY p.timestamp, p.title, p.content, p.original_content_tag, p.spoiler_tag, p.NSFW_tag, p.poster_userID, p.flairID, p.postID
+ SELECT {c(cols)}
+   FROM Posts
+  WHERE subredID = %s
   ORDER BY popularity DESC
 '''
     cmd = cur.mogrify(tmpl, (p_subredID, ))

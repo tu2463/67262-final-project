@@ -10,13 +10,23 @@ So That:  I can show my appreciation to the poster and recommend this post to mo
 
 print(us)
 
-def upvote_posts(p_postID, p_userID):
+def upvote_posts(p_postID, p_userID, p_postIDAgain):
     tmpl =  f'''
-INSERT INTO Interactions(type, postID, done_by_userID)
-VALUES('upvote', %s, %s);
-'''
-    cmd = cur.mogrify(tmpl, (p_postID, p_userID, ))
+    INSERT INTO Interactions(type, postID, done_by_userID)
+    VALUES('upvote', %s, %s);
+
+    SELECT postID, popularity
+    FROM Posts
+    WHERE postID = %s
+    '''
+    cmd = cur.mogrify(tmpl, (p_postID, p_userID, p_postIDAgain,))
     print_cmd(cmd)
     cur.execute(cmd)
 
-upvote_posts(6, 1)    
+    rows = cur.fetchall()
+    pp(rows)
+    # show_table( rows, 'IP,popularity' )
+    # show_table( rows, cols )
+
+postID, userID = 6, 1
+upvote_posts(postID, userID, postID)    
