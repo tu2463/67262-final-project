@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-12-10 01:57:58.251
+-- Last modification date: 2023-12-10 00:15:13.823
 
 -- tables
 -- Table: AdAccountJoinings
@@ -200,7 +200,6 @@ CREATE TABLE Posts (
     poster_userID int  NULL,
     subredID int  NOT NULL,
     flairID int  NULL,
-    popularity int  NOT NULL DEFAULT 0,
     CONSTRAINT Posts_pk PRIMARY KEY (postID)
 );
 

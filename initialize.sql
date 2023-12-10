@@ -40,3 +40,30 @@ CREATE database project;
 \copy Comments(content, postID, reply_to_comID, commenter_userID) FROM data/comments.csv csv header;
 \copy CommentRegulations(modID, comID) FROM data/comment_regulations.csv csv header;
 \copy Interactions(type, postID, done_by_userID, comID) FROM data/interactions.csv csv header; -- delete id (it's serialized now)
+
+DROP FUNCTION IF EXISTS fn_update_popularity();
+CREATE FUNCTION fn_update_popularity()
+RETURNS trigger
+LANGUAGE plpgsql AS
+$$
+BEGIN
+    if new.postID IS NOT NULL then
+        if  new.type = 'upvote' or new.type = 'share' then 
+            UPDATE Posts
+            SET popularity = popularity + 1
+            WHERE postID = new.postID;
+        elsif (new.postID IS NOT NULL) AND (new.type = 'downvote') then
+            UPDATE Posts
+            SET popularity = popularity - 1
+            WHERE postID = new.postID;
+        end if;
+    end if;
+
+    return null;
+END
+$$ ;
+
+CREATE TRIGGER tr_update_popularity
+AFTER INSERT ON Interactions
+FOR EACH ROW
+EXECUTE FUNCTION fn_update_popularity()
