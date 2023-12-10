@@ -37,6 +37,6 @@ CREATE database project;
 \copy UserLabelings(userID, flairID) FROM data/user_labelings.csv csv header;
 \copy Polls(postID, voting_length) FROM data/polls.csv csv header;
 \copy PollOptions(optionID, content, postID) FROM data/poll_options.csv csv header;
-\copy Comments(comID, content, postID, reply_to_comID, commenter_userID) FROM data/comments.csv csv header;
+\copy Comments(content, postID, reply_to_comID, commenter_userID) FROM data/comments.csv csv header;
 \copy CommentRegulations(modID, comID) FROM data/comment_regulations.csv csv header;
 \copy Interactions(type, postID, done_by_userID, comID) FROM data/interactions.csv csv header; -- delete id (it's serialized now)

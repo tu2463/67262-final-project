@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-12-09 20:59:49.659
+-- Last modification date: 2023-12-10 00:15:13.823
 
 -- tables
 -- Table: AdAccountJoinings
@@ -98,7 +98,7 @@ CREATE TABLE CommentRegulations (
 
 -- Table: Comments
 CREATE TABLE Comments (
-    comID int  NOT NULL,
+    comID serial  NOT NULL,
     content text  NOT NULL,
     postID int  NULL,
     reply_to_comID int  NULL,
