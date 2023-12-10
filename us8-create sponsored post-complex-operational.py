@@ -4,7 +4,7 @@ import time
 us='''
 * Simple operational US 8
 
-   As a:  Moderator
+   As a:  Advertiser
  I want:  To be able to easily create and launch a sponsored post that promotes my product or service
 So That:  I can reach a wide audience that will be likely to visit my website
 '''
