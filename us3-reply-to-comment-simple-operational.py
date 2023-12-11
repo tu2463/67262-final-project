@@ -10,16 +10,16 @@ So That:  I can discuss with other users
 
 print(us)
 
-def reply_to_comment(p_content,p_reply_to_comID,p_commenter_userID,p_reply_to_comIDAgain,p_commenter_userIDAgain):
+def reply_to_comment(p_comID, p_content,p_reply_to_comID,p_commenter_userID, p_comID_again):
     tmpl =  f'''
-INSERT INTO Comments(content,reply_to_comID,commenter_userID)
-VALUES(%s,%s,%s);
+INSERT INTO Comments(comID, content,reply_to_comID,commenter_userID)
+VALUES(%s,%s,%s,%s);
 
-SELECT content,reply_to_comID,commenter_userID
+SELECT comID, content,reply_to_comID,commenter_userID
   FROM Comments
- WHERE reply_to_comID = %s AND commenter_userID = %s
+ WHERE comID = %s
 '''
-    cmd = cur.mogrify(tmpl, (p_content,p_reply_to_comID,p_commenter_userID,p_reply_to_comIDAgain,p_commenter_userIDAgain, ))
+    cmd = cur.mogrify(tmpl, (p_comID, p_content,p_reply_to_comID,p_commenter_userID,p_comID_again, ))
     print_cmd(cmd)
     cur.execute(cmd)
 
@@ -27,5 +27,5 @@ SELECT content,reply_to_comID,commenter_userID
     pp(rows)
 
 content = "Glad to hear that my advice does work."
-reply_to_comID,commenter_userID = 9,23
-reply_to_comment(content, reply_to_comID, commenter_userID, reply_to_comID, commenter_userID)    
+comID,reply_to_comID,commenter_userID = 12,9,23
+reply_to_comment(comID, content, reply_to_comID, commenter_userID, comID)    

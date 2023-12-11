@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-12-10 04:09:13.452
+-- Last modification date: 2023-12-11 01:36:52.063
 
 -- tables
 -- Table: AdAccountJoinings
@@ -49,7 +49,7 @@ CREATE TABLE Ads (
 
 -- Table: AdvertisingMaterials
 CREATE TABLE AdvertisingMaterials (
-    ad_materialID serial  NOT NULL,
+    ad_materialID int  NOT NULL,
     status text  NOT NULL,
     impressions int  NOT NULL,
     eCPM decimal(15,3)  NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE CommentRegulations (
 
 -- Table: Comments
 CREATE TABLE Comments (
-    comID serial  NOT NULL,
+    comID int  NOT NULL,
     content text  NOT NULL,
     postID int  NULL,
     reply_to_comID int  NULL,
@@ -131,7 +131,7 @@ CREATE TABLE Guests (
 
 -- Table: Interactions
 CREATE TABLE Interactions (
-    interactionID serial  NOT NULL,
+    interactionID int  NOT NULL,
     type text  NOT NULL,
     postID int  NULL,
     done_by_userID int  NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE Moderators (
 
 -- Table: Payments
 CREATE TABLE Payments (
-    transactionID serial  NOT NULL,
+    transactionID int  NOT NULL,
     amount decimal(10,2)  NOT NULL,
     timestamp timestamp  NOT NULL,
     method text  NOT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE PostRegulations (
 
 -- Table: Posts
 CREATE TABLE Posts (
-    postID serial  NOT NULL,
+    postID int  NOT NULL,
     IP text  NOT NULL,
     timestamp timestamp  NOT NULL,
     title text  NOT NULL,

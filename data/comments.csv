@@ -1,12 +1,12 @@
-content,postID,reply_to_comID,commenter_userID
-You forgot about Anthony Davis!,1,,21
-Looks very delicious! Nice glazing going on here.,2,,22
-I agree!,2,2,21
-Great! Any raw discounts on laptops?,4,,23
-Noticed a fantastic freaking deal on Amazon for a gaming mouse!,4,4,24
-The Alienware laptops are on sale too! Check it out.,4,4,24
-I prefer desktops. Any good deals on those?,4,6,4
-For desktops you might want to check out Newegg. They have some killer deals.,4,7,24
-Thanks for the tip! I'll definitely check it out.,4,8,4
-Wow! these horror movie blood and death scenes are giving me chills!,19,,25
-The scene from "The Exorcist" is unforgettable. What's your favorite?,19,10,5
+comID,content,postID,reply_to_comID,commenter_userID
+1,You forgot about Anthony Davis!,1,,21
+2,Looks very delicious! Nice glazing going on here.,2,,22
+3,I agree!,2,2,21
+4,Great! Any raw discounts on laptops?,4,,23
+5,Noticed a fantastic freaking deal on Amazon for a gaming mouse!,4,4,24
+6,The Alienware laptops are on sale too! Check it out.,4,4,24
+7,I prefer desktops. Any good deals on those?,4,6,4
+8,For desktops you might want to check out Newegg. They have some killer deals.,4,7,24
+9,Thanks for the tip! I'll definitely check it out.,4,8,4
+10,Wow! these horror movie blood and death scenes are giving me chills!,19,,25
+11,The scene from "The Exorcist" is unforgettable. What's your favorite?,19,10,5
